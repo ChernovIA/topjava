@@ -26,6 +26,7 @@ public class AddMealServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 
         String date = request.getParameter("date");
         String time = request.getParameter("time");
@@ -33,8 +34,6 @@ public class AddMealServlet extends HttpServlet {
         LocalDateTime dateTime = LocalDateTime.parse(date+" "+time, TimeUtil.getFormatter());
 
         String description = request.getParameter("description");
-        byte[] bytes = description.getBytes(StandardCharsets.ISO_8859_1);
-        description = new String(bytes, StandardCharsets.UTF_8);
 
         String calories = request.getParameter("calories");
 
