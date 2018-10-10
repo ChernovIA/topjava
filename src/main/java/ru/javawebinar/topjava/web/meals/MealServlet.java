@@ -20,6 +20,7 @@ public class MealServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        log.debug("MealServlet init");
         controller = ServiceControllerImp.getInstance();
     }
 
@@ -27,9 +28,11 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("redirect to meals");
+        log.debug("MealServlet get");
 
         req.setAttribute("mealsList", controller.getAll());
+
+        log.debug("MealServlet forward to meals");
         req.getRequestDispatcher("meals.jsp").forward(req, resp);
     }
 

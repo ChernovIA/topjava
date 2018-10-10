@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.service;
 
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
-import ru.javawebinar.topjava.model.ModelDB;
+import ru.javawebinar.topjava.DAO.ModelDB;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 public class MealServiceImp implements MealService {

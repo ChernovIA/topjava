@@ -1,69 +1,35 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.TimeUtil;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class MealWithExceed {
 
-    private long id;
+    private final long id;
 
-    private LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
 
-    private String description;
+    private final String description;
 
-    private int calories;
+    private final int calories;
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getCalories() {
         return calories;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
     public boolean isExceed() {
         return exceed;
-    }
-
-    public void setExceed(boolean exceed) {
-        this.exceed = exceed;
-    }
-
-    public String getFormatDateTime(){
-        return dateTime.format(TimeUtil.getFormatter());
-    }
-
-    public String getFormatDate(){
-        return dateTime.format(TimeUtil.getFormatterDate());
-    }
-
-    public String getFormatTime(){
-        return dateTime.format(TimeUtil.getFormatterTime());
     }
 
     private boolean exceed;
