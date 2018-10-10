@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web.meals;
 
+import org.slf4j.Logger;
 import ru.javawebinar.topjava.controller.ServiceController;
 import ru.javawebinar.topjava.controller.ServiceControllerImp;
 import ru.javawebinar.topjava.model.Meal;
@@ -13,10 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+
 import static org.slf4j.LoggerFactory.getLogger;
-import org.slf4j.Logger;
 
 @WebServlet(urlPatterns = "/meals/update")
 public class UpdateMealServlet extends HttpServlet {
@@ -40,7 +40,7 @@ public class UpdateMealServlet extends HttpServlet {
         String date = request.getParameter("date");
         String time = request.getParameter("time");
 
-        LocalDateTime dateTime = LocalDateTime.parse(date+" "+time, TimeUtil.getFormatter());
+        LocalDateTime dateTime = LocalDateTime.parse(date+" "+time, TimeUtil.getDateFormatter());
 
         String description = request.getParameter("description");
 
@@ -61,6 +61,8 @@ public class UpdateMealServlet extends HttpServlet {
         MealWithExceed mealWithExceed = MealsUtil.createWithExceed(meal,false);
 
         request.setAttribute("meal", mealWithExceed);
+        request.setAttribute("dataPattern", TimeUtil.getDateFormat());
+        request.setAttribute("timePattern", TimeUtil.getTimeFormat());
 
         log.debug("DeleteMealServlet forward to meals");
         request.getRequestDispatcher("../mealEdit.jsp").forward(request,response);

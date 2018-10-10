@@ -8,16 +8,20 @@ public class TimeUtil {
         return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
     }
 
-    public static DateTimeFormatter getFormatter(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static DateTimeFormatter getDateFormatter(){
+        return DateTimeFormatter.ofPattern(getFullDateFormat());
     }
 
-    public static DateTimeFormatter getFormatterDate(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static String getFullDateFormat(){
+        return "yyyy-MM-dd HH:mm";
     }
 
-    public static DateTimeFormatter getFormatterTime(){
-        return DateTimeFormatter.ofPattern("HH:mm");
+    public static String getDateFormat(){
+        return "yyyy-MM-dd";
+    }
+
+    public static String getTimeFormat(){
+        return "HH:mm";
     }
 
 }

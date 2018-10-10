@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.web.meals;
 import org.slf4j.Logger;
 import ru.javawebinar.topjava.controller.ServiceController;
 import ru.javawebinar.topjava.controller.ServiceControllerImp;
+import ru.javawebinar.topjava.util.TimeUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,8 @@ public class MealServlet extends HttpServlet {
         log.debug("MealServlet get");
 
         req.setAttribute("mealsList", controller.getAll());
+        req.setAttribute("dataPattern", TimeUtil.getDateFormat());
+        req.setAttribute("timePattern", TimeUtil.getTimeFormat());
 
         log.debug("MealServlet forward to meals");
         req.getRequestDispatcher("meals.jsp").forward(req, resp);

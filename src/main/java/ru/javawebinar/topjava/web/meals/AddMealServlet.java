@@ -36,17 +36,23 @@ public class AddMealServlet extends HttpServlet {
         String date = request.getParameter("date");
         String time = request.getParameter("time");
 
-        LocalDateTime dateTime = LocalDateTime.parse(date+" "+time, TimeUtil.getFormatter());
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(date + " " + time, TimeUtil.getDateFormatter());
 
-        String description = request.getParameter("description");
+            String description = request.getParameter("description");
 
-        String calories = request.getParameter("calories");
+            String calories = request.getParameter("calories");
 
-        Meal newMeal = new Meal(ModelDB.getCurrentID().getAndIncrement(),dateTime, description, Integer.parseInt(calories));
-        controller.addMeal(newMeal);
-
-        log.debug("AddMealServlet redirect to meals");
-        response.sendRedirect("../meals");
+            Meal newMeal = new Meal(ModelDB.getCurrentID().getAndIncrement(), dateTime, description, Integer.parseInt(calories));
+            controller.addMeal(newMeal);
+        }
+        catch (Exception e){
+            log.error("AddMealServlet error "+ e.getMessage());
+        }
+        finally {
+            log.debug("AddMealServlet redirect to meals");
+            response.sendRedirect("../meals");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

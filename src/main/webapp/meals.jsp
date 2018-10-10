@@ -8,13 +8,11 @@
     <title>Title</title>
 </head>
 <body>
-<h3><a href="/topjava">Home</a></h3>
-<h2>Meals</h2>
 
 <table border="0" cellpadding="1" cellspacing="1" style="width:500px">
 
     <table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
-        <caption><p>Meals list</p></caption>
+        <caption><p><a href="/topjava">Home</a></p><p><h2>Meals</h2></p></caption>
         <tbody>
         <tr>
             <td style="text-align:center"><b>Time</b></td>
@@ -33,7 +31,7 @@
                 <tr style="color:#FF0000">
             </c:otherwise>
         </c:choose>
-                    <td style="text-align:center"><javatime:format value="${meal.dateTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+                    <td style="text-align:center"><javatime:format value="${meal.dateTime}" pattern="${dataPattern}"/></td>
                     <td style="text-align:center">${meal.description}</td>
                     <td style="text-align:center">${meal.calories}</td>
                     <td style="text-align:center"><a href="meals/update?id=<c:out value="${meal.id}"/>">Update</a></td>
