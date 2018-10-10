@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import static org.slf4j.LoggerFactory.getLogger;
 import org.slf4j.Logger;
@@ -32,6 +33,8 @@ public class UpdateMealServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("UpdateMealServlet - post");
+
+        request.setCharacterEncoding("UTF-8");
 
         String id  = request.getParameter("id");
         String date = request.getParameter("date");
