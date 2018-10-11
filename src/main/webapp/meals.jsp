@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<style>
+    .normal {color : green}
+    .exceed {color : red}
+</style>
 <table border="0" cellpadding="1" cellspacing="1" style="width:500px">
 
     <table align="center" border="1" cellpadding="1" cellspacing="1" style="width:500px">
@@ -23,21 +27,17 @@
 
         <c:forEach items="${mealsList}" var="meal">
 
-        <c:choose>
-            <c:when test="${meal.exceed == false}">
-                <tr style="color:#008000">
-            </c:when>
-            <c:otherwise>
-                <tr style="color:#FF0000">
-            </c:otherwise>
-        </c:choose>
-                    <td style="text-align:center"><javatime:format value="${meal.dateTime}" pattern="${dataPattern}"/></td>
-                    <td style="text-align:center">${meal.description}</td>
-                    <td style="text-align:center">${meal.calories}</td>
-                    <td style="text-align:center"><a href="meals/update?id=<c:out value="${meal.id}"/>">Update</a></td>
-                    <td style="text-align:center"><a href="meals/delete?id=<c:out value="${meal.id}"/>">Delete</a></td>
-                </tr>
-            </c:forEach>
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealWithExceed" scope="page"/>
+
+            <tr class = "${meal.exceed? 'exceed': 'normal'}">
+
+                <td style="text-align:center"><javatime:format value="${meal.dateTime}" pattern="${dataPattern}"/></td>
+                <td style="text-align:center">${meal.description}</td>
+                <td style="text-align:center">${meal.calories}</td>
+                <td style="text-align:center"><a href="meals/update?id=<c:out value="${meal.id}"/>">Update</a></td>
+                <td style="text-align:center"><a href="meals/delete?id=<c:out value="${meal.id}"/>">Delete</a></td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
     <form align="center" method="post" action="meals/add">
