@@ -20,8 +20,30 @@
 <section>
     <h3><a href="index.html">Home</a></h3>
     <h2>Meals</h2>
+
+    <form method="get" action="meals">
+        <table border="1" cellpadding="1" cellspacing="0">
+            <thead>
+            <tr>
+                <td>
+                    <p>От даты <input name="dateFrom" value="" type="date"/></p>
+                    <p>До даты <input name="dateTo" value="" type="date"/></p>
+                </td>
+                <td>
+                    <p>От времени <input name="timeFrom" value="" type="time"/></p>
+                    <p>До времени <input name="timeTo" value="" type="time"/></p>
+                </td>
+            </tr>
+            </thead>
+        </table>
+
+        <button type="submit">filter</button>
+    </form>
+
     <a href="meals?action=create">Add Meal</a>
     <hr/>
+
+
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
