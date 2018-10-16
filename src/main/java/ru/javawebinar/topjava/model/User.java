@@ -88,4 +88,23 @@ public class User extends AbstractNamedEntity {
                 ", caloriesPerDay=" + caloriesPerDay +
                 ')';
     }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null){
+            return false;
+        }
+
+        if (obj == this){
+            return true;
+        }
+
+        return this.getId() > ((User)obj).getId();
+    }
 }
