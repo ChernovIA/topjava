@@ -26,12 +26,12 @@
             <thead>
             <tr>
                 <td>
-                    <p>От даты <input name="dateFrom" value="" type="date"/></p>
-                    <p>До даты <input name="dateTo" value="" type="date"/></p>
+                    <p>От даты <input name="dateFrom" value="${param.dateFrom}" type="date"/></p>
+                    <p>До даты <input name="dateTo" value="${param.dateTo}" type="date"/></p>
                 </td>
                 <td>
-                    <p>От времени <input name="timeFrom" value="" type="time"/></p>
-                    <p>До времени <input name="timeTo" value="" type="time"/></p>
+                    <p>От времени <input name="timeFrom" value="${param.timeFrom}" type="time"/></p>
+                    <p>До времени <input name="timeTo" value="${param.timeTo}" type="time"/></p>
                 </td>
             </tr>
             </thead>
