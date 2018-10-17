@@ -30,8 +30,8 @@ public class MealRestController {
         log.info("getAll");
 
         return MealsUtil.getFilteredWithExceeded(service.getAll(SecurityUtil.authUserId(),
-                filterDate.get("dateFrom"), filterDate.get("dateTo")), SecurityUtil.authUserCaloriesPerDay(),
-                filterTime.get("timeFrom"), filterTime.get("timeTo"));
+                filterTime.get("timeFrom"), filterTime.get("timeTo")), SecurityUtil.authUserCaloriesPerDay(),
+                filterDate.get("dateFrom"), filterDate.get("dateTo"));
     }
 
     public Meal get(int id) {

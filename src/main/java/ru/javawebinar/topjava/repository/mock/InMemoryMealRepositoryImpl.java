@@ -7,8 +7,7 @@ import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
-import java.time.LocalDate;
-import java.util.Collection;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,10 +61,10 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public List<Meal> getAll(int userID, LocalDate dateFrom, LocalDate dateTo) {
+    public List<Meal> getAll(int userID, LocalTime dateFrom, LocalTime dateTo) {
         return repository.values()
                 .stream()
-                .filter(meal -> meal.getUserId() == userID && DateTimeUtil.isBetweenDate(meal.getDate(),dateFrom,dateTo))
+                .filter(meal -> meal.getUserId() == userID && DateTimeUtil.isBetween(meal.getTime(),dateFrom,dateTo))
                 .sorted((o1, o2) -> o2.getDateTime().compareTo(o1.getDateTime()))
                 .collect(Collectors.toList());
     }
