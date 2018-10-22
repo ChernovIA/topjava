@@ -39,7 +39,6 @@ Java Enterprise Online Project
     -  <a href="https://illustrated-git.readthedocs.org/en/latest/#working-with-remote-repositories">Working with remote repositories</a>
     -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5B3sufBJ_KFTpKkMEvaTQR">Видео по обучению Git</a>
     -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
-    -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
     -  [Основы Git за 20 минут](https://www.youtube.com/watch?v=TMeZGvtQnT8)
     -  [Git - для новичков](https://www.youtube.com/watch?list=PLY4rE9dstrJyTdVJpv7FibSaXB4BHPInb&v=PEKN8NtBDQ0)
 
@@ -105,7 +104,9 @@ Java Enterprise Online Project
 ```
 Сделать реализацию со сложностью O(N):
 - циклом за 1 проход по List<UserMeal>. Обратите внимание на п.13 замечаний
-- через Stream API за 1 проход по полному списку Stream<UserMeal>
+- через Stream API за 1 проход по исходному списку Stream<UserMeal> meals
+  - возможно дополнительные проходы по частям списка
+  - нельзя использовать внешние коллекции, не являющиеся частью коллектора или результатами работы stream
 ```
 #### Замечания по использованию Stream API:
 - Когда встречаешь что-то непривычное, приходится перестраивать мозги. Например, переход с процедурного на ООП программирование дается непросто. Те, кто не знает шаблонов (и не хотят учить) также их встречают плохо. Хорошая новость в том, что если это принять и начать использовать, то начинаешь получать от этого удовольствие. И тут главное не впасть в другую крайность:
@@ -184,6 +185,7 @@ Java Enterprise Online Project
 -  <a href="https://stepic.org/course/Введение-в-базы-данных-551">Курс "Введение в базы данных"</a>
 
 #### Разное
+-  <a href="http://javaops.ru/view/test">Вопросы по собеседованию, ресурсы для подготовки</a>
 -  <a href="http://jeeconf.com/materials/intellij-idea/">Эффективная работа с кодом в IntelliJ IDEA</a>
 -  <a href="http://www.quizful.net/test">Quizful- тесты онлайн</a>
 -  <a href="https://stepic.org/course/Введение-в-Linux-73">Введение в Linux</a>
