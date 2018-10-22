@@ -15,11 +15,14 @@
     <!-- Not necessary, already included with component-scan -->
     <!--<context:annotation-config/>-->
 
-    <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+    <context:component-scan base-package="ru.javawebinar.**.repository.inmemory">
+        <context:exclude-filter type="regex" expression=".repository.jdbc"/>
+    </context:component-scan>
 
     <context:component-scan base-package="ru.javawebinar.**.service"/>
 
-    <context:component-scan base-package="ru.javawebinar.topjava.web"/>
-
+    <context:component-scan base-package="ru.javawebinar.topjava.web">
+        <!--<context:include-filter type="regex" expression=".*.*test"/>-->
+    </context:component-scan>
 
 </beans>

@@ -1,5 +1,12 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
@@ -10,28 +17,70 @@ import java.util.List;
 @Repository
 public class JdbcMealRepositoryImpl implements MealRepository {
 
+    private static final BeanPropertyRowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
+
+    private final JdbcTemplate jdbcTemplate;
+
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private final SimpleJdbcInsert simpleJdbcInsert;
+
+    @Autowired
+    public JdbcMealRepositoryImpl(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+        this.simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("meals")
+                .usingGeneratedKeyColumns("id");
+        this.jdbcTemplate = jdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     @Override
     public Meal save(Meal meal, int userId) {
-        return null;
+
+        MapSqlParameterSource mapSql = new MapSqlParameterSource();
+        mapSql.addValue("id",          meal.getId());
+        mapSql.addValue("user_id",     userId);
+        mapSql.addValue("dateTime",    meal.getDateTime());
+        mapSql.addValue("calories",    meal.getCalories());
+        mapSql.addValue("description", meal.getDescription());
+
+        if (meal.isNew()) {
+            Number number = simpleJdbcInsert.executeAndReturnKey(mapSql);
+            meal.setId(number.intValue());
+        }
+        else if (namedParameterJdbcTemplate.update(
+                "UPDATE meals SET user_id=:user_id, dateTime=:dateTime, calories=:calories, " +
+                        "description=:description WHERE id=:id", mapSql) == 0) {
+            return null;
+        }
+
+        return meal;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return false;
+
+        return jdbcTemplate.update("delete from meals where id = :id and user_id = :user_id", id, userId) != 0;
+
     }
 
     @Override
     public Meal get(int id, int userId) {
-        return null;
+
+        List<Meal> meals = jdbcTemplate.query("Select * from meals where id = ? and user_id = ?",ROW_MAPPER, id, userId);
+
+        return DataAccessUtils.singleResult(meals);
+
     }
 
     @Override
     public List<Meal> getAll(int userId) {
-        return null;
+        return jdbcTemplate.query("Select * from meals where user_id = ? ORDER BY datetime desc", ROW_MAPPER, userId);
     }
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return jdbcTemplate.query("Select * from meals where user_id = ? and datetime BETWEEN ? AND ? ORDER BY datetime desc", ROW_MAPPER, userId, startDate, endDate);
     }
+
 }
