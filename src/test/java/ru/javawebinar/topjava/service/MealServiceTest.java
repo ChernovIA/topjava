@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ public class MealServiceTest {
     @Test
     public void get() {
         Meal meal = service.get(MEAL_ID, ADMIN_ID);
-        Assert.assertEquals(meal.getId(), MEAL1.getId());
+        Assertions.assertThat(meal).isEqualToComparingFieldByFieldRecursively(MEAL1);
     }
 
     @Test(expected = NotFoundException.class)
