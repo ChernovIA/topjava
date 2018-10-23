@@ -30,7 +30,7 @@ public class MealServiceTest {
     @Test
     public void get() {
         Meal meal = service.get(MEAL_ID, ADMIN_ID);
-        Assert.assertEquals(meal, MEAL1);
+        Assert.assertEquals(meal.getId(), MEAL1.getId());
     }
 
     @Test(expected = NotFoundException.class)
