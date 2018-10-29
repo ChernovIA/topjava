@@ -1,19 +1,39 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@NamedQueries({
+        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where m.id=:id and u.id=:userid"),
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal u where u.id =:id and u.user.id in ( SELECT u.id FROM User u left join Meal m on u.id = m.user.id where u.id =:userid)"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where u.id=:id ORDER BY m.dateTime DESC"),
+        @NamedQuery(name = Meal.ALL_SORTED_BETWEEN, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where u.id=:id and m.dateTime BETWEEN :timeStart and :timeEnd ORDER BY m.dateTime DESC")
+        })
+@Entity
+@Table(name = "meals")
 public class Meal extends AbstractBaseEntity {
+    public static final String GET = "Meal.get";
+    public static final String DELETE = "Meal.delete";
+    public static final String ALL_SORTED = "Meal.getAllSorted";
+    public static final String ALL_SORTED_BETWEEN = "Meal.getAllSortedBetween";
+
+    @NotNull
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
 
+    @NotBlank
     private String description;
 
+    @NotNull
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     public Meal() {
