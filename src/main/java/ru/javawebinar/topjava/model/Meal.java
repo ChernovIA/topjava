@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @NamedQueries({
-        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where m.id=:id and u.id=:userid"),
-        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal u where u.id =:id and u.user.id in ( SELECT u.id FROM User u left join Meal m on u.id = m.user.id where u.id =:userid)"),
-        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where u.id=:id ORDER BY m.dateTime DESC"),
-        @NamedQuery(name = Meal.ALL_SORTED_BETWEEN, query = "SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where u.id=:id and m.dateTime BETWEEN :timeStart and :timeEnd ORDER BY m.dateTime DESC")
+        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m where m.id =:id and m.user.id=:userid"), //SELECT m FROM Meal m INNER JOIN FETCH User as u on m.user.id = u.id where m.id=:id and u.id=:userid
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal u where u.id =:id and u.user.id = :userid"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m where m.user.id = :userid ORDER BY m.dateTime DESC"),
+        @NamedQuery(name = Meal.ALL_SORTED_BETWEEN, query = "SELECT m FROM Meal m where m.user.id = :userid and m.dateTime BETWEEN :timeStart and :timeEnd ORDER BY m.dateTime DESC")
         })
 @Entity
 @Table(name = "meals")
