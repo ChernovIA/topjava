@@ -1,8 +1,6 @@
 .idea
 out
 target
-patch
-html
 *.iml
 log
 
