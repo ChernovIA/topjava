@@ -17,8 +17,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <spring.version>5.1.2.RELEASE</spring.version>
-        <tomcat.version>9.0.12</tomcat.version>
         <spring-data-jpa.version>2.1.2.RELEASE</spring-data-jpa.version>
+        <tomcat.version>9.0.12</tomcat.version>
 
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
@@ -96,17 +96,6 @@
             <version>2.3.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-
         <!-- https://medium.com/criciumadev/java-10-migration-5d853f5b5f7e -->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -124,7 +113,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>

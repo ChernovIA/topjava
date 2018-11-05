@@ -1,7 +1,12 @@
 package ru.javawebinar.topjava.repository.datajpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ru.javawebinar.topjava.model.Meal;
 
 public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
+
+    @Query("DELETE FROM Meal m WHERE n.id=:id and n.user.id=:userid")
+    int delete(@Param("id") int id, @Param("userid") int userid);
 }
